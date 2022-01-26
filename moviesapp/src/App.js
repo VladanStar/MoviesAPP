@@ -10,19 +10,19 @@ function App() {
   // const movies = ['1','2','3'];
   const[movies, setMovies] = useState([]);
 
-  useEffect( async() => {
-
-    const moviesResp = await fetch(FEATURED_API);
-    const moviesR = await moviesResp.json();
-
-    setMovies(moviesR);
-
+  useEffect(() => {
+ fetch(FEATURED_API)
+ .then(res =>res.json())
+ .then(data =>{
+   console.log(data)
+   setMovies(data.results)
+ })
   },[]);
 
 
   return (
-    <div className="App">
-      {movies.map((movie) => (
+    <div>
+      {movies.length> 0 && movies.map((movie) => (
         <Movie />
       ))}
     </div>
